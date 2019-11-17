@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-//import org.apache.commons.lang3.EnumUtils;
+import org.apache.commons.lang3.EnumUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -245,11 +245,11 @@ public class LancamentoController {
 		lancamento.setLocalizacao(lancamentoDto.getLocalizacao());
 		lancamento.setData(this.dateFormat.parse(lancamentoDto.getData()));
 
-		//if (EnumUtils.isValidEnum(TipoEnum.class, lancamentoDto.getTipo())) {
+		if (EnumUtils.isValidEnum(TipoEnum.class, lancamentoDto.getTipo())) {
 			lancamento.setTipo(TipoEnum.valueOf(lancamentoDto.getTipo()));
-		//} else {
-		//	result.addError(new ObjectError("tipo", "Tipo inválido."));
-		//}
+		} else {
+			result.addError(new ObjectError("tipo", "Tipo inválido."));
+		}
 
 		return lancamento;
 	}
